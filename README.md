@@ -9,7 +9,11 @@ To use this program you'll need to:
  2.  Log into your Co-operative Personal Banking account. Transaction Details can be exported from either *Recent Transactions* or *Previous Statements* pages.
  3.  Then click the bookmark which will add a couple of lines of Javascript into you statement page.
  4.  Click a button in a dialog window to choose between CSV and OFX-formatted downlload.
- 5.  Choose the path on your computer where you'd like your transaction data downloaded.
+ 5.  Choose the path on your computer where you'd like your transaction data downloaded.  
+  
+The [original author's website](http://www.anyware.co.uk/uncoop/#how) has a little video with good stuff to read; but bear in mind as you follow his instructions, that you will need the bookmarklet in the repo you are now looking at - or preferably one you've adapted from it - rather than the original author's if you want to download your Co-op bank transactions as they appear at present (March 2015).
+
+
  
 # Privacy 
 If your privacy alarm bells are ringing - as they should be! - consider that the Co-op page knows nothing of `coop-export.js` until you click the bookmark. At the time you are reading a list of bank transactions you have long ago completely finished the submission of your credentials: they are not accessible to any JavaScript code on pages with transaction details. The `coop-export` Javascript executes only when you invoke it. There is a trust issue in that the actual downloading is done by an Adobe Flash program whose code we don't see. The JavaScript code here in this repo is available for your inspection: it is concerned with navigating the two kinds of web page; extracting the export data and invoking the download program.   
