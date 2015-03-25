@@ -1,1 +1,1 @@
-javascript:(function()%7Bfunction%20scr(s)%7Bdocument.body.appendChild(document.createElement('script')).src=s;%7D%20scr('https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js');%20scr('http://www.anyware.co.uk/uncoop/coop-export.js');%7D)();
+javascript:(function()%7Bfunction%20scr(s)%7Bdocument.body.appendChild(document.createElement('script')).src=s;%7D%20scr('https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js');%20scr('https://jazz2.eu/coop-export/coop-export.js');%7D)();
