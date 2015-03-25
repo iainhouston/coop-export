@@ -226,8 +226,8 @@ function exporter_generate_ofx(data) {
     var nowMonth = nowDate.getMonth();
     var generatedDate = exporter_ofx_date(
         nowDate.getDate()+'/'+
-        (nowMonth+1)+'/'+
-        nowDate.getFullYear());
+            (nowMonth+1)+'/'+
+            nowDate.getFullYear());
     ofx += '<DTSERVER>'+generatedDate+'</DTSERVER>\n';
     ofx += '       <LANGUAGE>ENG</LANGUAGE>\n'+
         '   </SONRS>\n'+
@@ -276,6 +276,8 @@ function exporter_generate_ofx(data) {
     return ofx;
 }
 
+var RECENT_STATEMENT_NO = 0;
+
 function exporter_display(data) {
     var w = $('#exporter-window');
     $('.exporter-data', w).hide();
@@ -293,10 +295,10 @@ function exporter_display(data) {
         $('.exporter-statement-date', w).text(data.statementDate);
         $('.exporter-statement-balance', w).text(data.statementBalance);
 
-        var isStatement = data.statementNumber.length > 0;
+        var isStatement = data.statementNumber > RECENT_STATEMENT_NO;
 
         var fn = (isStatement ? 'Statement_' : 'Recent_transactions_') + 
-            exporter_clean_account(data.accountName) + '_' +
+            // exporter_clean_account(data.accountName) + '_' +
             data.accountNumber + '_' +
             data.statementDate.replace(/\//g, '-');
         $('.exporter-filename', w).text(fn);
@@ -394,7 +396,7 @@ function exporter_main() {
             window.alert("You appear to be on the Statements list page. Click on the statement number you wish to view, then press this Save Co-op Statement bookmark again.");
         } else {
             window.alert("Sorry, this is not a Co-op banking Recent Items or Statements page. Please navigate to "+
-                "your online banking and select the account or statement you wish to download and try again.");
+			 "your online banking and select the account or statement you wish to download and try again.");
         }
         return false;
     }
@@ -433,7 +435,7 @@ function exporter_main() {
         // :contains(Balance) ambiguous on this page
         var balanceNode = $('td.recentTransactionsAccountData table tr:nth-child(2) td:contains(Balance)').next();
         finalBalance = exporter_clean_balance(balanceNode.text());
-        // StatementNo   is determined below after parsing transactions
+        // StatementNo   is left undefined
         // StatementDate is determined below after parsing transactions
     };
 
@@ -518,8 +520,8 @@ function exporter_main() {
         startDate = finalDate;
         endDate = firstDate;
         statementDate = endDate;
-        //  We use the statementNo to attempt to identify duplicate OFX downloads
-        statementNo = exporter_ofx_date(startDate); 
+        //  We use the statementNo in an OFX FITID to attempt to identify duplicate downloads
+        statementNo = RECENT_STATEMENT_NO; // Note exporter_display() dependency
     }
 
     if (!startDate || !endDate || output.length == 0) {
@@ -556,7 +558,7 @@ function exporter_load(url, callback) {
     {
         if( !done && ( !this.readyState 
                     || this.readyState == "loaded" 
-                    || this.readyState == "complete") )
+                       || this.readyState == "complete") )
         {
             done = true;
 
