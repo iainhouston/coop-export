@@ -5,7 +5,7 @@ This is a fork of the program that [Marc Palmer](http://uncoop.me) wrote to down
 
 To use this program you'll need to:  
 
- 1.  Copy a *bookmarklet* (the contents of [js/bokkmarklet.js](js/bokkmarklet.js)) into your browser's bookmarks
+ 1.  Copy a *bookmarklet* (the contents of [js/bokkmarklet.js](js/bookmarklet.js)) into your browser's bookmarks
  2.  Log into your Co-operative Personal Banking account. Transaction Details can be exported from either *Recent Transactions* or *Previous Statements* pages.
  3.  Then click the bookmark which will add a couple of lines of Javascript into you statement page.
  4.  Click a button in a dialog window to choose between CSV and OFX-formatted downlload.
@@ -16,7 +16,7 @@ The [original author's website](http://www.anyware.co.uk/uncoop/#how) has a litt
 
  
 # Privacy 
-If your privacy alarm bells are ringing - as they should be! - consider that the Co-op page knows nothing of `coop-export.js` until you click the bookmark. At the time you are reading a list of bank transactions you have long ago completely finished the submission of your credentials: they are not accessible to any JavaScript code on pages with transaction details. The `coop-export` Javascript executes only when you invoke it. There is a trust issue in that the actual downloading is done by an Adobe Flash program whose code we don't see. The JavaScript code here in this repo is available for your inspection: it is concerned with navigating the two kinds of web page; extracting the export data and invoking the download program.  However, we can't guarantee that the ActionScript code [here](https://github.com/dcneiner/Downloadify/blob/master/src/Downloadify.as) is actually the source of our Flash file).
+If your privacy alarm bells are ringing - as they should be! - consider that the Co-op page knows nothing of `coop-export.js` until you click the bookmark. At the time you are reading a list of bank transactions you have long ago completed the submission of your credentials: they are not accessible to any JavaScript code on pages with transaction details. The JavaScript `coop-export.js`  executes only when you invoke it. There *is* a trust issue in that the actual downloading is done by an Adobe Flash program whose code we don't see. The JavaScript code here in this repo is available for your inspection: it is concerned with navigating the two kinds of web page; extracting the export data and invoking the download program.  However, we can't guarantee that the ActionScript code [here](https://github.com/dcneiner/Downloadify/blob/master/src/Downloadify.as) is actually the source of our Flash file).
 
 So, there is a risk to your privacy you'll have to assess for yourself. For myself, I trust the [original author's intentions](http://www.anyware.co.uk/uncoop/#how) and I have no reason to believe that my meagre financial transaction history has ever been transmitted anywhere I wouldn't want it to be.
 
