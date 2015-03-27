@@ -5,7 +5,7 @@ This is a fork of the program that [Marc Palmer](http://uncoop.me) wrote to down
 
 To use this program you'll need to:  
 
- 1.  Copy a *bookmarklet* (the contents of [js/bokkmarklet.js](js/bookmarklet.js)) into your browser's bookmarks
+ 1.  Copy a *bookmarklet* (the contents of [js/bookmarklet.js](js/bookmarklet.js)) into your browser's bookmarks
  2.  Log into your Co-operative Personal Banking account. Transaction Details can be exported from either *Recent Transactions* or *Previous Statements* pages.
  3.  Then click the bookmark which will add a couple of lines of Javascript into you statement page.
  4.  Click a button in a dialog window to choose between CSV and OFX-formatted downlload.
