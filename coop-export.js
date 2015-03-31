@@ -88,12 +88,14 @@ function exporter_dialog_create() {
         '<div class="exporter-download-ofx"></div>'+
         '</div>'+
         '<div class="exporter-footnote">'+
-        '<br/>This feature is <strong>not supported in any way by The Co-operative Bank</strong> and no warranties or guarantees are '+
+        'This feature is <strong>not supported in any way by The Co-operative Bank</strong> and no warranties or guarantees are '+
         'made that it will continue to work. <strong>Do not call the bank about problems with this feature.</strong>'+
         '</div>';
 }
 
 function exporter_styles() {
+    // inject style into the exporter dialogue box
+    // a function whose sole purpose is its global jQuery side-effects .. oo-aar
     $('#exporter-overlay').css({
         'position': 'absolute',
         'zIndex': '9998',
@@ -300,7 +302,7 @@ function exporter_display(data) {
         var fn = (isStatement ? 'Statement_' : 'Recent_transactions_') + 
             // exporter_clean_account(data.accountName) + '_' +
             data.accountNumber + '_' +
-            data.statementDate.replace(/\//g, '-');
+            exporter_ofx_date(data.statementDate); // OS Finder-sortable tail
         $('.exporter-filename', w).text(fn);
         
         $('.exporter-message', w).text(
@@ -333,7 +335,7 @@ function exporter_hasNodeWithText(sel, text) {
 function exporter_clean_balance(text) {
     var balanceText;
     balanceText = text.replace('\u00A3', '');
-    // Co-op now employs training + or -
+    // Co-op now employs trailing + or -
     balanceText = $.trim(balanceText.replace('+', ''));
     if (balanceText.indexOf('-') != -1) {
         // we require leading '-'
