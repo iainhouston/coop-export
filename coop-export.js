@@ -202,7 +202,7 @@ function exporter_clean_account(s) {
     return result;
 }
 
-function exporter_ofx_date(coopDate) {
+function exporter_reverse_date(coopDate, separator) {
     var parts = coopDate.split('/');
     if (parts[0].length < 2) {
         parts[0] = '0'+parts[0];
@@ -210,7 +210,15 @@ function exporter_ofx_date(coopDate) {
     if (parts[1].length < 2) {
         parts[1] = '0'+parts[1];
     }
-    return parts[2]+parts[1]+parts[0];
+    return parts[2]+separator+parts[1]+separator+parts[0];
+}
+
+function exporter_ofx_date(coopDate) {
+    return exporter_reverse_date(coopDate, '')
+    }
+
+function exporter_file_date(coopDate) {
+    return exporter_reverse_date(coopDate, '-')
 }
 
 function exporter_generate_ofx(data) {
@@ -302,7 +310,7 @@ function exporter_display(data) {
         var fn = (isStatement ? 'Statement_' : 'Recent_transactions_') + 
             // exporter_clean_account(data.accountName) + '_' +
             data.accountNumber + '_' +
-            exporter_ofx_date(data.statementDate); // OS Finder-sortable tail
+            exporter_file_date(data.statementDate); // OS Finder-sortable tail
         $('.exporter-filename', w).text(fn);
         
         $('.exporter-message', w).text(
